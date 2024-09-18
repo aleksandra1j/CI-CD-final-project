@@ -1,2 +1,6 @@
+import os
+
 from pymongo import MongoClient
-conn = MongoClient("mongodb://localhost:27017")
+
+mongo_uri = os.getenv("MONGO_URI", "mongodb://host.docker.internal:27017/mydatabase")
+conn = MongoClient(mongo_uri)
