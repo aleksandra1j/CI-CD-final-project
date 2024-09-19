@@ -26,7 +26,8 @@ EXPOSE 8000
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV APP_ENV production
-ENV MONGO_URI mongodb://host.docker.internal:27017/mydatabase
+#ENV MONGO_URI mongodb://alex24:alextheroot24@mongo:27017/mydatabase
+ENV MONGO_URI mongodb://mongo:27017/mydatabase
 
 # Step 9: Uvicorn to run the FastAPI app
 CMD ["uvicorn", "index:app", "--host", "0.0.0.0", "--port", "8000"]
