@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicdapp-deployment
+  namespace: mynamespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cicdapp
+  template:
+    metadata:
+      labels:
+        app: cicdapp
+    spec:
+      containers:
+      - name: cicdapp-container
+        image: aleksandra1dd/cicdapp:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            configMapKeyRef:
+              name: cicdapp-configmap    # Referencing the ConfigMap
+              key: MONGO_URI             # Referring to the "MONGO_URI" key
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: cicdapp-secrets
+              key: db-username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: cicdapp-secrets
+              key: db-password
